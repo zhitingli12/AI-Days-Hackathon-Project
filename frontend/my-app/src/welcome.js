@@ -1,7 +1,7 @@
 import React from 'react';
 import './welcome.css';
 
-export const Iphone = () => {
+export const Welcome = () => {
     return (
         <div className="iphone">
             <div className="image-wrapper">
@@ -14,3 +14,5 @@ export const Iphone = () => {
         </div>
     );
 };
+
+export default Welcome;
