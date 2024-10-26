@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Image, StyleSheet, Platform, Button } from 'react-native';
+import {TextInput, Image, StyleSheet, Platform, Button, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import React, { useState } from 'react';
 
 import { HelloWave } from '@/components/HelloWave';
@@ -7,34 +7,40 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
-  const [name, setName] = useState('Murali');
+  const [name, setName] = useState('');
   const [inputName, setInputName] = useState('');
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#11113B' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Hi Zhiting and Murali!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">What is your name?</ThemedText>
-        <TextInput 
-          style={styles.input} 
-          placeholder='e.g, Rayyan Shaikh'
-          onChangeText={(text) => setInputName(text)}
-          />
-        <Button title='Submit' onPress={() => setName(inputName)} />
-        <ThemedText> Your name is {name} </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{ flex: 1 }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ParallaxScrollView
+          headerBackgroundColor={{ light: '#A1CEDC', dark: '#11113B' }}
+          headerImage={
+            <Image
+              source={require('@/assets/images/partial-react-logo.png')}
+              style={styles.reactLogo}
+            />
+          }>
+          <ThemedView style={styles.titleContainer}>
+            <ThemedText type="title">Welcome to Gator Watch</ThemedText>
+            <HelloWave />
+          </ThemedView>
+          <ThemedView style={styles.stepContainer}>
+            <ThemedText type="subtitle">What is your name?</ThemedText>
+            <TextInput 
+              style={styles.input} 
+              placeholder='e.g, Rayyan Shaikh'
+              onChangeText={(text) => setInputName(text)}
+            />
+            <Button title='Submit' onPress={() => setName(inputName)} />
+            <ThemedText> Your name is {name} </ThemedText>
+          </ThemedView>
+        </ParallaxScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 
   
