@@ -1,13 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { View, Image, StyleSheet, Text, Alert } from "react-native";
+import { View, Image, StyleSheet, Text, Alert, PermissionsAndroid, Platform } from "react-native";
+import Geolocation from 'react-native-geolocation-service';
 
 export const Iphone = (): JSX.Element => {
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    const getLocation = () => {
-      navigator.geolocation.getCurrentPosition(
+    const requestLocationPermission = async () => {
+      if (Platform.OS === 'android') {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            {
+              title: "Location Permission",
+              message: "This app needs access to your location.",
+              buttonNeutral: "Ask Me Later",
+              buttonNegative: "Cancel",
+              buttonPositive: "OK"
+            }
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            return true;
+          } else {
+            setErrorMsg("Permission denied");
+            return false;
+          }
+        } catch (err) {
+          setErrorMsg("Permission error: " + err);
+          return false;
+        }
+      } else {
+        return true;
+      }
+    };
+
+    const getLocation = async () => {
+      const hasPermission = await requestLocationPermission();
+      if (!hasPermission) {
+        return;
+      }
+
+      Geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setLocation({ latitude, longitude });
