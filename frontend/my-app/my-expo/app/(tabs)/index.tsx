@@ -8,6 +8,8 @@ import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
   const [name, setName] = useState('Murali');
+  const [inputName, setInputName] = useState('');
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#11113B' }}
@@ -26,8 +28,10 @@ export default function HomeScreen() {
         <TextInput 
           style={styles.input} 
           placeholder='e.g, Rayyan Shaikh'
-          onChangeText={(val) => setName(val)} />
-        <Text>Your name is {name}</Text>
+          onChangeText={(text) => setInputName(text)}
+          />
+        <Button title='Submit' onPress={() => setName(inputName)} />
+        <ThemedText> Your name is {name} </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
 
