@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, Platform, Button } from 'react-native';
+import React, { useState } from 'react';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -48,6 +49,8 @@ export default function HomeScreen() {
       </ThemedView>
     </ParallaxScrollView>
   );
+
+  
 }
 
 const styles = StyleSheet.create({
