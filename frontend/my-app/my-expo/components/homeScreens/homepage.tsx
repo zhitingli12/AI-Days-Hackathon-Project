@@ -1,128 +1,73 @@
 import React from "react";
-import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 export const Iphone = (): JSX.Element => {
     return (
         <View style={styles.iphone}>
-            <View style={styles.div}>
-                <Text style={styles.textWrapper}>How May I Help You?</Text>
+            <Image
+                source={{ uri: "https://c.animaapp.com/XIkrUTna/img/image-1@2x.png" }}
+                style={styles.logoImage}
+            />
+            <Text style={styles.appName}>Gator Watch</Text>
+            <Text style={styles.headerText}>How May I Help You?</Text>
 
-                <ImageBackground
-                    source={{ uri: "https://c.animaapp.com/XIkrUTna/img/union.svg" }}
-                    style={styles.overlap}
-                >
-                    <Text style={styles.textWrapper2}>Location</Text>
-                </ImageBackground>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Location</Text>
+            </TouchableOpacity>
 
-                <ImageBackground
-                    source={{ uri: "https://c.animaapp.com/XIkrUTna/img/union-1.svg" }}
-                    style={styles.overlapGroup}
-                >
-                    <Text style={styles.textWrapper3}>Safety Guide</Text>
-                </ImageBackground>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Safety Guide</Text>
+            </TouchableOpacity>
 
-                <ImageBackground
-                    source={{ uri: "https://c.animaapp.com/XIkrUTna/img/union-2.svg" }}
-                    style={styles.divWrapper}
-                >
-                    <Text style={styles.textWrapper4}>Chat Box</Text>
-                </ImageBackground>
-
-                <Image
-                    style={styles.image}
-                    source={{ uri: "https://c.animaapp.com/XIkrUTna/img/image-1@2x.png" }}
-                />
-            </View>
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Chat Box</Text>
+            </TouchableOpacity>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     iphone: {
-        backgroundColor: '#bedaf3',
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: '100%',
+        backgroundColor: "#bedaf3",
+        alignItems: "center",
+        justifyContent: "center",
     },
-    div: {
-        backgroundColor: '#bedaf3',
-        borderWidth: 1,
-        borderColor: '#000000',
-        height: 844,
-        width: 390,
-        position: 'relative',
+    logoImage: {
+        width: 100, // Adjust width as needed
+        height: 100, // Adjust height as needed
+        marginBottom: 20,
     },
-    textWrapper: {
-        color: '#041124',
-        fontFamily: 'Inter', // Ensure "Inter" font is installed or use a similar default
-        fontSize: 40,
-        fontStyle: 'italic',
-        fontWeight: '400',
-        position: 'absolute',
-        textAlign: 'center',
-        top: 322,
-        left: 17,
-        width: 357,
+    appName: {
+        fontSize: 24,
+        fontWeight: "bold",
+        color: "#041124",
+        marginBottom: 20,
     },
-    overlap: {
-        height: 65,
-        width: 271,
-        position: 'absolute',
-        top: 449,
-        left: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    textWrapper2: {
-        color: '#ffffff',
-        fontFamily: 'Inter',
+    headerText: {
         fontSize: 30,
-        fontStyle: 'italic',
-        fontWeight: '400',
-        textAlign: 'center',
+        fontStyle: "italic",
+        color: "#041124",
+        textAlign: "center",
+        marginBottom: 30,
     },
-    overlapGroup: {
-        height: 65,
-        width: 271,
-        position: 'absolute',
-        top: 538,
-        left: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
+    button: {
+        backgroundColor: "#85a9cf",
+        borderRadius: 20,
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+        marginVertical: 10,
+        width: 200,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
-    textWrapper3: {
-        color: '#ffffff',
-        fontFamily: 'Inter',
-        fontSize: 30,
-        fontStyle: 'italic',
-        fontWeight: '400',
-        textAlign: 'center',
-    },
-    divWrapper: {
-        height: 65,
-        width: 271,
-        position: 'absolute',
-        top: 627,
-        left: 59,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    textWrapper4: {
-        color: '#ffffff',
-        fontFamily: 'Inter',
-        fontSize: 30,
-        fontStyle: 'italic',
-        fontWeight: '400',
-        textAlign: 'center',
-    },
-    image: {
-        height: 206,
-        width: 250,
-        position: 'absolute',
-        top: 76,
-        left: 62,
-        resizeMode: 'cover',
+    buttonText: {
+        color: "#ffffff",
+        fontSize: 18,
+        fontStyle: "italic",
     },
 });
-
