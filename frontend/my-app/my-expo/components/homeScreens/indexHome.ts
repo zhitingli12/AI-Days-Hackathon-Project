@@ -1,0 +1,1 @@
+import {Iphone} from '../../components/screens/welcome';
