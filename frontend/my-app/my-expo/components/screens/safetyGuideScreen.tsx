@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Image, StyleSheet, Text, Alert, ActivityIndicator, TouchableWithoutFeedback } from "react-native";
 
+// main screen for the safety guide feature
 export const SafetyGuideScreen = (): JSX.Element => {
   return (
       <View style={styles.container}>
@@ -12,6 +13,7 @@ export const SafetyGuideScreen = (): JSX.Element => {
   );
 };
 
+// defining styles used in the component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
