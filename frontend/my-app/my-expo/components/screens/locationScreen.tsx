@@ -1,4 +1,4 @@
-import React, { useState, useEffect }, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 import MapView, { Marker, UrlTile, Circle } from "react-native-maps";
 import { globalLocation } from "../../components/screens/global"; // Adjust the path as needed
 import { HomePhone } from "../../components/homeScreens/homepage"; // Adjust the path as needed
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 const { width, height } = Dimensions.get("window");
 
@@ -34,8 +35,19 @@ function getWeatherData(){
 }
 
 export const LocationScreen = (): JSX.Element => {
+  const [showHome, setShowHome] = useState<boolean>(false);
+
+  const [circleCenter, setCircleCenter] = useState<{ latitude: number; longitude: number } | null>(
+    globalLocation
+  );
+  const [circleRadius, setCircleRadius] = useState<number>(1000); // Default radius in meters
   // Check if globalLocation has been set
-  const hasLocation = globalLocation && typeof globalLocation.latitude === 'number' && typeof globalLocation.longitude === 'number';
+  // const hasLocation = globalLocation && typeof globalLocation.latitude === 'number' && typeof globalLocation.longitude === 'number';
+
+  const hasLocation =
+    circleCenter &&
+    typeof circleCenter.latitude === "number" &&
+    typeof circleCenter.longitude === "number";
 
   if (!hasLocation) {
     // Show a loading indicator while location is being fetched
@@ -45,6 +57,12 @@ export const LocationScreen = (): JSX.Element => {
         <Text style={styles.text}>Fetching location...</Text>
       </View>
     );
+  }
+
+  getWeatherData();
+
+  if (showHome) {
+    return <HomePhone />;
   }
 
   return (
