@@ -1,29 +1,13 @@
-import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-  Dimensions,
-  Alert,
-} from "react-native";
-import MapView, { Marker, UrlTile, Circle } from "react-native-maps";
+import React from "react";
+import { View, StyleSheet, Text, ActivityIndicator, Dimensions } from "react-native";
+import MapView, { Marker, UrlTile } from "react-native-maps";
 import { globalLocation } from "../../components/screens/global"; // Adjust the path as needed
 
 const { width, height } = Dimensions.get("window");
 
 export const LocationScreen = (): JSX.Element => {
-  // Initialize state for circle center and radius
-  const [circleCenter, setCircleCenter] = useState<{ latitude: number; longitude: number } | null>(
-    globalLocation
-  );
-  const [circleRadius, setCircleRadius] = useState<number>(1000); // Default radius in meters
-
   // Check if globalLocation has been set
-  const hasLocation =
-    circleCenter &&
-    typeof circleCenter.latitude === "number" &&
-    typeof circleCenter.longitude === "number";
+  const hasLocation = globalLocation && typeof globalLocation.latitude === 'number' && typeof globalLocation.longitude === 'number';
 
   if (!hasLocation) {
     // Show a loading indicator while location is being fetched
@@ -35,25 +19,6 @@ export const LocationScreen = (): JSX.Element => {
     );
   }
 
-  // Developer functions to update circle properties
-  const updateCircleCenter = (latitude: number, longitude: number) => {
-    setCircleCenter({ latitude, longitude });
-  };
-
-  const updateCircleRadius = (newRadius: number) => {
-    setCircleRadius(newRadius);
-  };
-
-  // Example usage: Uncomment these lines to modify circle properties programmatically
-  // React.useEffect(() => {
-  //   // Update circle center after 5 seconds
-  //   const timer = setTimeout(() => {
-  //     updateCircleCenter(37.78825, -122.4324); // New coordinates
-  //     updateCircleRadius(2000); // New radius
-  //   }, 5000);
-  //   return () => clearTimeout(timer);
-  // }, []);
-
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Your Current Location</Text>
@@ -61,32 +26,25 @@ export const LocationScreen = (): JSX.Element => {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: circleCenter.latitude,
-          longitude: circleCenter.longitude,
+          latitude: globalLocation.latitude,
+          longitude: globalLocation.longitude,
           latitudeDelta: 0.005, // Zoom level
           longitudeDelta: 0.005,
         }}
       >
-        {/* Use OpenStreetMap tiles with a single subdomain */}
+        {/* Use OpenStreetMap tiles without subdomains */}
         <UrlTile
-          urlTemplate="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          urlTemplate="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" // Using 'a' as the subdomain
           maximumZ={19}
           flipY={false}
         />
         {/* Marker at user's location */}
         <Marker
           coordinate={{
-            latitude: circleCenter.latitude,
-            longitude: circleCenter.longitude,
+            latitude: globalLocation.latitude,
+            longitude: globalLocation.longitude,
           }}
           title="You are here"
-        />
-        {/* Circle around the user's location */}
-        <Circle
-          center={circleCenter}
-          radius={circleRadius}
-          strokeColor="rgba(255,0,0,0.8)" // Semi-transparent red border
-          fillColor="rgba(255,0,0,0.2)"   // Light red fill
         />
       </MapView>
     </View>
@@ -98,15 +56,15 @@ export default LocationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#bedaf3",
-    alignItems: "center",
+    backgroundColor: '#bedaf3',
+    alignItems: 'center',
     paddingTop: 50,
   },
   centered: {
     flex: 1,
-    backgroundColor: "#bedaf3",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#bedaf3',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   map: {
     width: width * 0.9, // 90% of screen width
@@ -115,12 +73,12 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 24,
-    fontWeight: "bold",
-    color: "#041124",
+    fontWeight: 'bold',
+    color: '#041124',
     marginBottom: 20,
   },
   text: {
     fontSize: 18,
-    color: "#333",
+    color: '#333',
   },
 });
