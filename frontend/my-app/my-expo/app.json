@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-expo",
-    "slug": "my-expo",
+    "name": "GatorWatch",
+    "slug": "GatorWatch",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.GatorWatch"
     },
     "web": {
       "bundler": "metro",
