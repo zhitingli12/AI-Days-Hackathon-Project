@@ -1,7 +1,8 @@
-import React from "react";
-import { View, StyleSheet, Text, ActivityIndicator, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Text, ActivityIndicator, Dimensions, TouchableOpacity } from "react-native";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import { globalLocation } from "../../components/screens/global"; // Adjust the path as needed
+import { HomePhone } from "../../components/homeScreens/homepage"; // Adjust the path as needed
 
 const { width, height } = Dimensions.get("window");
 
@@ -19,6 +20,7 @@ function getWeatherData(){
 }
 
 export const LocationScreen = (): JSX.Element => {
+  const [showHome, setShowHome] = useState<boolean>(false);
   // Check if globalLocation has been set
   const hasLocation = globalLocation && typeof globalLocation.latitude === 'number' && typeof globalLocation.longitude === 'number';
   getWeatherData();
@@ -30,6 +32,9 @@ export const LocationScreen = (): JSX.Element => {
         <Text style={styles.text}>Fetching location...</Text>
       </View>
     );
+  }
+  if (showHome) {
+    return <HomePhone />;
   }
 
   return (
@@ -60,6 +65,12 @@ export const LocationScreen = (): JSX.Element => {
           title="You are here"
         />
       </MapView>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => { setShowHome(true)}} // Return Homepage component
+      >
+        <Text style={styles.buttonText}>Back</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -81,7 +92,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: width * 0.9, // 90% of screen width
-    height: height * 0.6, // 60% of screen height
+    height: height * 0.75, // 60% of screen height
     borderRadius: 10,
   },
   headerText: {
@@ -93,5 +104,24 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: '#333',
+  },
+  button: {
+    backgroundColor: "#85a9cf",
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    marginVertical: 10,
+    width: 200,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontStyle: "italic",
   },
 });
