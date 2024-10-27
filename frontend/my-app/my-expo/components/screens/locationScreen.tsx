@@ -15,7 +15,14 @@ function getWeatherData(){
     fetch(`${OpenWeatherAPI.base}weather?lat=${globalLocation.latitude}&lon=${globalLocation.longitude}&appid=${OpenWeatherAPI.key}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        globalLocation.windDegree = data.wind.deg;
+        globalLocation.windGust = data.wind.gust;
+        globalLocation.windSpeed = data.wind.speed;
+        globalLocation.cityName = data.name;
+        console.log("City Name: " + globalLocation.cityName);
+        console.log("Wind Degree: " + globalLocation.windDegree);
+        console.log("Wind Gust: " + globalLocation.windGust);
+        console.log("Wind Speed: " + globalLocation.windSpeed);
     })
 }
 
