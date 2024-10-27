@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Image, StyleSheet, Text, Alert, ActivityIndicator, TouchableWithoutFeedback } from "react-native";
 import * as Location from 'expo-location';
 import { HomePhone } from "../../components/homeScreens/homepage";// Uncomment when Homepage component is available
-
+import { globalLocation } from "../../components/screens/global";
 export const Iphone = (): JSX.Element => {
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -42,7 +42,9 @@ export const Iphone = (): JSX.Element => {
       let currentLocation = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = currentLocation.coords;
       setLocation({ latitude, longitude });
-      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+      globalLocation.latitude = latitude;
+      globalLocation.longitude = longitude;
+      console.log(`Latitude: ${globalLocation.latitude}, Longitude: ${longitude}`);
 
       setShowHome(true); // Trigger display of Homepage on successful location fetch
     } catch (error: any) {

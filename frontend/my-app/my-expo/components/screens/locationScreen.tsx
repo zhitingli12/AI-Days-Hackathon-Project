@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Image, StyleSheet, Text, Alert, ActivityIndicator, TouchableWithoutFeedback } from "react-native";
+import { globalLocation } from "../../components/screens/global";
 
 export const LocationScreen = (): JSX.Element => {
+    console.log(`IN LOCATIONSCREEN: Latitude: ${globalLocation.latitude}, Longitude: ${globalLocation.longitude}`);
     return (
         <View style={styles.container}>
           <View style={styles.iphone}>
