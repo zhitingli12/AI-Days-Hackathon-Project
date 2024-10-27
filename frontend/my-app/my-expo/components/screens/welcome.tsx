@@ -71,7 +71,7 @@ export const Iphone = (): JSX.Element => {
           <View style={styles.imageWrapper}>
             <Image
               style={styles.image}
-              source={{ uri: "https://i.imgur.com/J1Qy3ah.png" }}
+              source={{ uri: "https://c.animaapp.com/6ThwplpN/img/image-1@2x.png" }}
             />
           </View>
           {location ? (
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: 100, // Adjust width as needed
-    height: 150, // Adjust height as needed
+    width: 247, 
+    height: 277,
     marginBottom: 20,
     resizeMode: "contain",
   },
