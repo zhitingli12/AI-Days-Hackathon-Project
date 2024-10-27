@@ -69,7 +69,7 @@ export const Iphone = (): JSX.Element => {
           <View style={styles.imageWrapper}>
             <Image
               style={styles.image}
-              source={{ uri: "https://c.animaapp.com/fXQHN7ui/img/image-1@2x.png" }}
+              source={{ uri: "https://i.imgur.com/J1Qy3ah.png" }}
             />
           </View>
           {location ? (

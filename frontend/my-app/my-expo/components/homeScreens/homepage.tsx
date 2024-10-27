@@ -1,29 +1,60 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+
+import React, { useState, useEffect } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import { LocationScreen } from "../../components/screens/locationScreen";
+import { SafetyGuideScreen } from "../../components/screens/safetyGuideScreen";
+import { ChatBotScreen } from "../../components/screens/chatBotScreen";
 
 export const HomePhone = (): JSX.Element => {
+    const [showMap, setShowMap] = useState<boolean>(false);
+    const [showSafetyGuide, setshowSafetyGuide] = useState<boolean>(false);
+    const [showChatBot, setshowChatBot] = useState<boolean>(false);
+
+    if(showMap) {
+        return <LocationScreen />;
+    }
+    else if(showSafetyGuide) {
+        return <SafetyGuideScreen />;
+    }
+    else if(showChatBot) {
+        return <ChatBotScreen />;
+    }
+
     return (
         <View style={styles.iphone}>
             <Image
-                source={{ uri: "https://c.animaapp.com/XIkrUTna/img/image-1@2x.png" }}
+                source={{ uri: "https://i.imgur.com/J1Qy3ah.png" }}
                 style={styles.logoImage}
             />
-            <Text style={styles.appName}>Gator Watch</Text>
+            
             <Text style={styles.headerText}>How May I Help You?</Text>
 
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Location</Text>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => { setShowMap(true) }} // Return locationScreen component
+            >
+                <Text style={styles.buttonText}>Check Location</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity 
+                style={styles.button}
+                // Return safetyGuideScreen component
+                onPress={() => { setshowSafetyGuide(true) }}
+            >
                 <Text style={styles.buttonText}>Safety Guide</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Chat Box</Text>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => { setshowChatBot(true) }} // Return chatBotScreen component
+            >
+                <Text style={styles.buttonText}>Chat With Ai</Text>
             </TouchableOpacity>
         </View>
+
+
     );
+    
 };
 
 const styles = StyleSheet.create({
