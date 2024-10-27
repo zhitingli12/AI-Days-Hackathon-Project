@@ -48,7 +48,7 @@ export const HomePhone = (): JSX.Element => {
                 style={styles.button}
                 onPress={() => { setshowChatBot(true) }} // Return chatBotScreen component
             >
-                <Text style={styles.buttonText}>Chat With Ai</Text>
+                <Text style={styles.buttonText}>Chat With AI</Text>
             </TouchableOpacity>
         </View>
 
