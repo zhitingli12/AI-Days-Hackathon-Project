@@ -1,55 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { View, Image, StyleSheet, Text, Alert, PermissionsAndroid, Platform } from "react-native";
-import Geolocation from 'react-native-geolocation-service';
+import { View, Image, StyleSheet, Text, Alert, ActivityIndicator } from "react-native";
+import * as Location from 'expo-location';
 
 export const Iphone = (): JSX.Element => {
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [fetching, setFetching] = useState<boolean>(false);
 
   useEffect(() => {
-    const requestLocationPermission = async () => {
-      if (Platform.OS === 'android') {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-            {
-              title: "Location Permission",
-              message: "This app needs access to your location.",
-              buttonNeutral: "Ask Me Later",
-              buttonNegative: "Cancel",
-              buttonPositive: "OK"
-            }
-          );
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            return true;
-          } else {
-            setErrorMsg("Permission denied");
-            return false;
-          }
-        } catch (err) {
-          setErrorMsg("Permission error: " + err);
-          return false;
-        }
-      } else {
-        return true;
-      }
-    };
-
     const getLocation = async () => {
-      const hasPermission = await requestLocationPermission();
-      if (!hasPermission) {
-        return;
-      }
+      setFetching(true);
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          setFetching(false);
+          return;
+        }
 
-      Geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setLocation({ latitude, longitude });
-          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-        },
-        (error) => setErrorMsg(error.message),
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-      );
+        let currentLocation = await Location.getCurrentPositionAsync({});
+        const { latitude, longitude } = currentLocation.coords;
+        setLocation({ latitude, longitude });
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+      } catch (error: any) {
+        setErrorMsg(error.message);
+      } finally {
+        setFetching(false);
+      }
     };
 
     Alert.alert(
@@ -76,13 +53,18 @@ export const Iphone = (): JSX.Element => {
             source={{ uri: "https://c.animaapp.com/fXQHN7ui/img/image-1@2x.png" }}
           />
         </View>
-        <Text style={styles.text}>
-          {location
-            ? `Latitude: ${location.latitude}, Longitude: ${location.longitude}`
-            : errorMsg
-            ? `Error: ${errorMsg}`
-            : "Fetching location..."}
-        </Text>
+        {location ? (
+          <Text style={styles.text}>
+            Latitude: {location.latitude}, Longitude: {location.longitude}
+          </Text>
+        ) : errorMsg ? (
+          <Text style={styles.text}>Error: {errorMsg}</Text>
+        ) : fetching ? (
+          <>
+            <ActivityIndicator size="large" color="#0000ff" />
+            <Text style={styles.text}>Fetching location...</Text>
+          </>
+        ) : null}
       </View>
     </View>
   );
