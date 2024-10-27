@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
-export const Iphone = (): JSX.Element => {
+export const HomePhone = (): JSX.Element => {
     return (
         <View style={styles.iphone}>
             <Image
