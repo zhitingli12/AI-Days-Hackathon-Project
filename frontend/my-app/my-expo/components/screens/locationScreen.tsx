@@ -5,26 +5,6 @@ import { globalLocation } from "../../components/screens/global"; // Adjust the 
 
 const { width, height } = Dimensions.get("window");
 
-const OpenWeatherAPI = {
-    key: "7bada2649ce6cc097f183726ff4d4e63",
-    base: "https://api.openweathermap.org/data/2.5/"
-}
-
-function getWeatherData(){
-    fetch(`${OpenWeatherAPI.base}weather?lat=${globalLocation.latitude}&lon=${globalLocation.longitude}&appid=${OpenWeatherAPI.key}`)
-    .then(response => response.json())
-    .then(data => {
-        globalLocation.windDegree = data.wind.deg;
-        globalLocation.windGust = data.wind.gust;
-        globalLocation.windSpeed = data.wind.speed;
-        globalLocation.cityName = data.name;
-        console.log("City Name: " + globalLocation.cityName);
-        console.log("Wind Degree: " + globalLocation.windDegree);
-        console.log("Wind Gust: " + globalLocation.windGust);
-        console.log("Wind Speed: " + globalLocation.windSpeed);
-    })
-}
-
 export const LocationScreen = (): JSX.Element => {
   // Check if globalLocation has been set
   const hasLocation = globalLocation && typeof globalLocation.latitude === 'number' && typeof globalLocation.longitude === 'number';
