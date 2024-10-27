@@ -8,7 +8,7 @@ import { ChatBotScreen } from "../../components/screens/chatBotScreen";
 export const HomePhone = (): JSX.Element => {
     const [showMap, setShowMap] = useState<boolean>(false);
     const [showSafetyGuide, setshowSafetyGuide] = useState<boolean>(false);
-    const [showChatBot, setshowChatBot] = useState<boolean>(false);
+    // const [showChatBot, setshowChatBot] = useState<boolean>(false);
 
     if(showMap) {
         return <LocationScreen />;
@@ -16,9 +16,9 @@ export const HomePhone = (): JSX.Element => {
     else if(showSafetyGuide) {
         return <SafetyGuideScreen />;
     }
-    else if(showChatBot) {
-        return <ChatBotScreen />;
-    }
+    // else if(showChatBot) {
+    //     return <ChatBotScreen />;
+    // }
 
     return (
         <View style={styles.iphone}>
@@ -44,12 +44,12 @@ export const HomePhone = (): JSX.Element => {
                 <Text style={styles.buttonText}>Safety Guide</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
+            {/* <TouchableOpacity 
                 style={styles.button}
                 onPress={() => { setshowChatBot(true) }} // Return chatBotScreen component
             >
                 <Text style={styles.buttonText}>Chat With AI</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
 
 

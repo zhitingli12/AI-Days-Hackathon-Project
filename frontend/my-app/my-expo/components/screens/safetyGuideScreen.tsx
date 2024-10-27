@@ -1,13 +1,12 @@
-import React from "react";
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  Text,
-  Dimensions,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, ScrollView, StyleSheet, Text, Dimensions, TouchableOpacity } from "react-native";
+import { HomePhone } from "../homeScreens/homepage";  
 
 export const SafetyGuideScreen = (): JSX.Element => {
+  const [showHome, setShowHome] = useState<boolean>(false);
+  if (showHome) {
+    return <HomePhone />;
+  }
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -136,6 +135,12 @@ export const SafetyGuideScreen = (): JSX.Element => {
             <Text style={styles.bulletPoint}>• </Text>
             <Text style={styles.contentText}>Assist Neighbors: Check on elderly or disabled neighbors to ensure their safety.</Text>
           </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => { setShowHome(true) }} // Return Homepage component
+        >
+          <Text style={styles.buttonText}>Back</Text>
+        </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -164,6 +169,7 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 25,
+    alignItems: "center", // Center content horizontally
   },
   sectionHeader: {
     fontSize: 22,
@@ -191,6 +197,25 @@ const styles = StyleSheet.create({
   },
   subHeader: {
     fontWeight: "600",
+  },
+  button: {
+    backgroundColor: "#85a9cf",
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    marginVertical: 10,
+    width: 200,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonText: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontStyle: "italic",
   },
 });
 
