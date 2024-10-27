@@ -5,8 +5,6 @@ export const LocationScreen = (): JSX.Element => {
     return (
         <View style={styles.container}>
           <View style={styles.iphone}>
-            <View style={styles.imageWrapper}>
-            </View>
           </View>
         </View>
     );
@@ -23,7 +21,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#bedaf3',
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     flex: 1,
   },
   imageWrapper: {

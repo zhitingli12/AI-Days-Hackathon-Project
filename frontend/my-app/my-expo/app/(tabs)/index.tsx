@@ -75,11 +75,9 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { Iphone } from "../../components/screens/welcome"; // or use the correct path
-//import { HomePhone } from "../../components/homeScreens/homepage"; // or use the correct path
 
 export default function App() {
   return (
-    //<HomePhone />
     <Iphone />
   );
 }

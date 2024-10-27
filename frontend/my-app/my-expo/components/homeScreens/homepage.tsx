@@ -66,8 +66,9 @@ const styles = StyleSheet.create({
     },
     logoImage: {
         width: 100, // Adjust width as needed
-        height: 100, // Adjust height as needed
+        height: 150, // Adjust height as needed
         marginBottom: 20,
+        resizeMode: "contain"
     },
     appName: {
         fontSize: 24,

@@ -112,11 +112,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: 247,
-    height: 277,
-    position: 'absolute',
-    top: 243,
-    resizeMode: 'cover',
+    width: 100, // Adjust width as needed
+    height: 150, // Adjust height as needed
+    marginBottom: 20,
+    resizeMode: "contain",
   },
   text: {
     fontSize: 18,
